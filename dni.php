@@ -114,6 +114,4 @@ function restDaysYear($getyear){
 		}
 	return $hdaysUnix;
 }
-$check = restDaysYear("2015");
-var_dump($check) ;
 ?>
