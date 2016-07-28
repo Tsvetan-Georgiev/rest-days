@@ -1,6 +1,6 @@
 <?php
 function restDaysYear($getyear){
-	$hdays[$getyear."-01-01"] = "Нова година"; 
+	$hdays[$getyear."-01-01"] = "Нова година";
 	$arr_weekds = array();
 		function velikDen($G,$petilipon){
 					$m = 0;
@@ -39,7 +39,13 @@ function restDaysYear($getyear){
 						}
 					return $Razppetak2;
 		}
-		// функция връщаща броя на дните във февруари
+		/**
+		 *  Функция връщаща броя на дните във февруари
+		 *
+		 *  @param int $G Година
+		 *
+		 *	@return int Брой дни
+		 */
 		function getDaysFev($G){
 			$RC= date("L",strtotime("$G"."-02-02"));
 			if ($RC==1) {
@@ -99,14 +105,14 @@ function restDaysYear($getyear){
 		$hdays[velikDen($getyear,"1")] = "Великден";
 		$hdays[velikDen($getyear,"0")] = "Великден";
 		$hdays[velikDen($getyear,"-1")] = "Великден";
-		$hdays[$getyear."-03-03"] = "Национален празник"; 
-		$hdays[$getyear."-05-01"] = "Ден на труда"; 
-		$hdays[$getyear."-05-06"] = "Гергьовден"; 
-		$hdays[$getyear."-05-24"] = "Ден на писмеността"; 
-		$hdays[$getyear."-09-06"] = "Ден на съединението"; 
-		$hdays[$getyear."-09-22"] = "Независимостта на България"; 
-		$hdays[$getyear."-12-24"] = "Коледа"; 
-		$hdays[$getyear."-12-25"] = "Коледа"; 
+		$hdays[$getyear."-03-03"] = "Национален празник";
+		$hdays[$getyear."-05-01"] = "Ден на труда";
+		$hdays[$getyear."-05-06"] = "Гергьовден";
+		$hdays[$getyear."-05-24"] = "Ден на писмеността";
+		$hdays[$getyear."-09-06"] = "Ден на съединението";
+		$hdays[$getyear."-09-22"] = "Независимостта на България";
+		$hdays[$getyear."-12-24"] = "Коледа";
+		$hdays[$getyear."-12-25"] = "Коледа";
 		$hdays[$getyear."-12-26"] = "Коледа";
 		foreach ($hdays as $key => $value) {
 			$za_bazata=strtotime($key);
