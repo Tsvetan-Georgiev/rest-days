@@ -3,41 +3,41 @@ function restDaysYear($getyear){
 	$hdays[$getyear."-01-01"] = "Нова година";
 	$arr_weekds = array();
 		function velikDen($G,$petilipon){
-					$m = 0;
-					$R1 = $G % 19;
-					$R2 = $G % 4;
-					$R3 = $G % 7;
-					$RA = 19*$R1 + 16;
-					$R4 = $RA % 30;
-					$RB = 2*$R2 + 4*$R3 + 6*$R4;
-					$R5 = $RB % 7;
-					$RC = $R4 + $R5;
-						if ($RC<28){
-							$RC=$RC+3;
-							$m=4;
-						}
-						else if($RC>=28){
-							$RC=$RC-27;
-						    $m=5;
-						}
-						// ако великден е май или денят е преди 10-ти слага нула на деня
-						if ($m==5 or $RC<10) {
-						// стринг от точната дата на великден
-							$Razppetak="0".$RC."-"."0".$m."-".$G;
-						// записва датата в секунди по линукският формат
-							$Razppetak=strtotime($Razppetak);
-						// добавя или изважда дни според втория зададен параметър на функцията
-							$Razppetak2=strtotime(date("d-m-Y",$Razppetak)."-"."$petilipon"." day");
-						// превръща датата във формат МесецДен-Година за да е по-лесно да бъде сортиран с останалите дати
-							$Razppetak2=date("Y-m-d",$Razppetak2);
-						}
-						else{
-							$Razppetak=$RC."-"."0".$m."-".$G;
-							$Razppetak=strtotime($Razppetak);
-							$Razppetak2=strtotime(date("d-m-Y",$Razppetak)."-"."$petilipon"." day");
-							$Razppetak2=date("Y-m-d",$Razppetak2);
-						}
-					return $Razppetak2;
+			$m = 0;
+			$R1 = $G % 19;
+			$R2 = $G % 4;
+			$R3 = $G % 7;
+			$RA = 19*$R1 + 16;
+			$R4 = $RA % 30;
+			$RB = 2*$R2 + 4*$R3 + 6*$R4;
+			$R5 = $RB % 7;
+			$RC = $R4 + $R5;
+				if ($RC<28){
+					$RC=$RC+3;
+					$m=4;
+				}
+				else if($RC>=28){
+					$RC=$RC-27;
+				    $m=5;
+				}
+				// ако великден е май или денят е преди 10-ти слага нула на деня
+				if ($m==5 or $RC<10) {
+				// стринг от точната дата на великден
+					$Razppetak="0".$RC."-"."0".$m."-".$G;
+				// записва датата в секунди по линукският формат
+					$Razppetak=strtotime($Razppetak);
+				// добавя или изважда дни според втория зададен параметър на функцията
+					$Razppetak2=strtotime(date("d-m-Y",$Razppetak)."-"."$petilipon"." day");
+				// превръща датата във формат МесецДен-Година за да е по-лесно да бъде сортиран с останалите дати
+					$Razppetak2=date("Y-m-d",$Razppetak2);
+				}
+				else{
+					$Razppetak=$RC."-"."0".$m."-".$G;
+					$Razppetak=strtotime($Razppetak);
+					$Razppetak2=strtotime(date("d-m-Y",$Razppetak)."-"."$petilipon"." day");
+					$Razppetak2=date("Y-m-d",$Razppetak2);
+				}
+			return $Razppetak2;
 		}
 		/**
 		 *  Функция връщаща броя на дните във февруари
