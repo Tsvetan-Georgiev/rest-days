@@ -102,10 +102,6 @@ class RestDays {
 	public static function get($year) {
 		$hdays[$year."-01-01"] = "Нова година";
 		self::getWeekendsOfYear($year, $hdays);
-		$hdays[self::velikDen($year,2)] = "Великден";
-		$hdays[self::velikDen($year,1)] = "Великден";
-		$hdays[self::velikDen($year,0)] = "Великден";
-		$hdays[self::velikDen($year,-1)] = "Великден";
 		$hdays[$year."-03-03"] = "Национален празник";
 		$hdays[$year."-05-01"] = "Ден на труда";
 		$hdays[$year."-05-06"] = "Гергьовден";
@@ -115,6 +111,10 @@ class RestDays {
 		$hdays[$year."-12-24"] = "Коледа";
 		$hdays[$year."-12-25"] = "Коледа";
 		$hdays[$year."-12-26"] = "Коледа";
+		$hdays[self::velikDen($year,"2")] = "Велики петък";
+		$hdays[self::velikDen($year,"1")] = "Великден";
+		$hdays[self::velikDen($year,"0")] = "Великден";
+		$hdays[self::velikDen($year,"-1")] = "Велики понеделник";
 		// сортиране по дати
 		ksort($hdays);
 		foreach ($hdays as $key => $value) {
