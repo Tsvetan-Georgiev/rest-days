@@ -16,9 +16,6 @@ class ImportDniCSV {
     public static function rowToArray($row) {
         $cols = explode(",", $row);
         $year = self::rowToYear($row);
-        if ($year < 1990) {
-            throw new Exception("Невалидна година ".$year);
-        }
         // попълване на почивните дни
         $restDays = [];
         for ($mon=1; $mon<=12; $mon++) {
@@ -53,6 +50,9 @@ class ImportDniCSV {
             throw new Exception("Невалиден CSV ред\n\n".$row);
         }
         $year = (int) $cols[0];
+        if ($year < 1990) {
+            throw new Exception("Невалидна година ".$year);
+        }        
         return $year;
     }
 }
