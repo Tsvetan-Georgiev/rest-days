@@ -131,10 +131,10 @@ class RestDays {
 *	Връща масив с всички почивни дни
 *
 *	@param int $year Година
-*   @param array $hdays Почивни дни
+*   @param array|null $hdays Почивни дни
 *	@return array Списък с почивните дни
 */
-function restDaysYear($year, $hdays){
-	return RestDays::get($year);
+function restDaysYear($year, $hdays = null){
+	return RestDays::get($year, $hdays);
 }
 ?>
