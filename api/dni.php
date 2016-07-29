@@ -75,22 +75,22 @@ class RestDays {
 		// ако великден е май или денят е преди 10-ти слага нула на деня
 		if ($m==5 or $RC<10) {
 			// стринг от точната дата на великден
-			$Razppetak="0".$RC."-"."0".$m."-".$G;
+			$razpPetak="0".$RC."-"."0".$m."-".$G;
 			// записва датата в секунди по линукският формат
-			$Razppetak=strtotime($Razppetak);
+			$razpPetak=strtotime($razpPetak);
 			// добавя или изважда дни според втория зададен параметър на функцията
-			$Razppetak2=strtotime(date("d-m-Y",$Razppetak)."-"."$petilipon"." day");
+			$razpPetak2=strtotime(date("d-m-Y",$razpPetak)."-"."$petilipon"." day");
 			// превръща датата във формат МесецДен-Година за да е по-лесно да бъде сортиран с останалите дати
-			$Razppetak2=date("Y-m-d",$Razppetak2);
+			$razpPetak2=date("Y-m-d",$razpPetak2);
 		}
 		else{
-			$Razppetak=$RC."-"."0".$m."-".$G;
-			$Razppetak=strtotime($Razppetak);
-			$Razppetak2=strtotime(date("d-m-Y",$Razppetak)."-"."$petilipon"." day");
-			$Razppetak2=date("Y-m-d",$Razppetak2);
+			$razpPetak=$RC."-"."0".$m."-".$G;
+			$razpPetak=strtotime($razpPetak);
+			$razpPetak2=strtotime(date("d-m-Y",$razpPetak)."-"."$petilipon"." day");
+			$razpPetak2=date("Y-m-d",$razpPetak2);
 		}
 
-		return $Razppetak2;
+		return $razpPetak2;
 	}
 
 	/**
