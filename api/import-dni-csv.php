@@ -1,6 +1,6 @@
 <?php
 
-include 'routines.php';
+require_once 'routines.php';
 
 /**
 *   Помощни функции за импорт от CSV

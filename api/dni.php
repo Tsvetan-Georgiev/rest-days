@@ -72,34 +72,20 @@ class RestDays {
 		    $m=5;
 		}
 
-		// ако великден е май или денят е преди 10-ти слага нула на деня
-		if ($m==5 or $RC<10) {
-			// стринг от точната дата на великден
-			$razpPetak="0".$RC."-"."0".$m."-".$G;
-			// записва датата в секунди по линукският формат
-			$razpPetak=strtotime($razpPetak);
-			// добавя или изважда дни според втория зададен параметър на функцията
-			$razpPetak2=strtotime(date("d-m-Y",$razpPetak)."-"."$petilipon"." day");
-			// превръща датата във формат МесецДен-Година за да е по-лесно да бъде сортиран с останалите дати
-			$razpPetak2=date("Y-m-d",$razpPetak2);
-		}
-		else{
-			$razpPetak=$RC."-"."0".$m."-".$G;
-			$razpPetak=strtotime($razpPetak);
-			$razpPetak2=strtotime(date("d-m-Y",$razpPetak)."-"."$petilipon"." day");
-			$razpPetak2=date("Y-m-d",$razpPetak2);
-		}
+        // +/- дни от великден
+        $okoloVelikden = strtotime(isoDate($G, $m, $RC)) + $petilipon;
 
-		return $razpPetak2;
+		return date("Y-m-d", $okoloVelikden);
 	}
 
 	/**
 	*	Откриване на всички почивни дни в дадена година
 	*
 	*	@param int $year
+    *   @param array $hdays
 	*	@return array Списък с почивни дни
 	*/
-	public static function get($year) {
+	public static function get($year, $hdays) {
 		$hdays[$year."-01-01"] = "Нова година";
 		self::getWeekendsOfYear($year, $hdays);
 		$hdays[$year."-03-03"] = "Национален празник";
@@ -130,9 +116,10 @@ class RestDays {
 *	Връща масив с всички почивни дни
 *
 *	@param int $year Година
+*   @param array|null $hdays Почивни дни
 *	@return array Списък с почивните дни
 */
-function restDaysYear($year){
-	return RestDays::get($year);
+function restDaysYear($year, $hdays = null){
+	return RestDays::get($year, $hdays);
 }
 ?>

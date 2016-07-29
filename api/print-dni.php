@@ -1,16 +1,23 @@
 <?php
-	include "dni.php";
-    include "import-dni-csv.php";
+    require_once "dni.php";
+    require_once "import-dni-csv.php";
 
     // варианти на справката
-    $csv = $_REQUEST['csv'];
-    if (isset($csv)) {
-        $year = ImportDniCSV::rowToYear($csv);
+    if (isset($_REQUEST['csv'])) {
+        $csv = $_REQUEST['csv'];
 
+        $year = ImportDniCSV::rowToYear($csv);
         $check = ImportDniCSV::rowToArray($csv);
+
+        // смесен вариант - първо се вика CSV-то, после официалните празници
+        $mix = $_REQUEST['mix'];
+        if (isset($mix) && $mix == '1') {
+            $check = restDaysYear($year, $check);
+        }
     } else {
-        $year = $_REQUEST['year'];
-        if (!isset($year)) {
+        if (isset($_REQUEST['year']))
+            $year = $_REQUEST['year'];
+        else {
             $year = date("Y");
         }
 
