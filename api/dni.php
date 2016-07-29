@@ -97,9 +97,10 @@ class RestDays {
 	*	Откриване на всички почивни дни в дадена година
 	*
 	*	@param int $year
+    *   @param array $hdays
 	*	@return array Списък с почивни дни
 	*/
-	public static function get($year) {
+	public static function get($year, $hdays) {
 		$hdays[$year."-01-01"] = "Нова година";
 		self::getWeekendsOfYear($year, $hdays);
 		$hdays[$year."-03-03"] = "Национален празник";
@@ -130,9 +131,10 @@ class RestDays {
 *	Връща масив с всички почивни дни
 *
 *	@param int $year Година
+*   @param array $hdays Почивни дни
 *	@return array Списък с почивните дни
 */
-function restDaysYear($year){
+function restDaysYear($year, $hdays){
 	return RestDays::get($year);
 }
 ?>
