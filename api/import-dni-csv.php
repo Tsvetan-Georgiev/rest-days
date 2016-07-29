@@ -16,7 +16,7 @@ class ImportDniCSV {
         if (count($cols) != 13) {
             throw new Exception("Невалиден CSV ред\n\n".$row);
         }
-        $year = (int) $rols[0];
+        $year = (int) $cols[0];
         if ($year < 1990) {
             throw new Exception("Невалидна година ".$year);
         }
