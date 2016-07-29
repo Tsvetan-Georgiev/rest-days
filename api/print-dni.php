@@ -1,3 +1,22 @@
+<?php
+	include "dni.php";
+    include "import-dni-csv.php";
+
+    // варианти на справката
+    $csv = $_REQUEST['csv'];
+    if (isset($csv)) {
+        $year = ImportDniCSV::rowToYear($csv);
+
+        $check = ImportDniCSV::rowToArray($csv);
+    } else {
+        $year = $_REQUEST['year'];
+        if (!isset($year)) {
+            $year = date("Y");
+        }
+
+        $check = restDaysYear($year);
+    }
+?>
 <meta charset="UTF-8">
 <style>
     table{
@@ -17,6 +36,7 @@
 </style>
     <table>
         <thead>
+            <tr align="center"><td colspan="3"><b>Година: <?= $year ?></b></td></tr>
             <tr>
                 <td>
                     Unixtime
@@ -31,10 +51,6 @@
         </thead>
 
 <?php
-
-	include "dni.php";
-	$check = restDaysYear("2015");
-	//var_dump($check) ;
     $countHDays = 0;
     foreach ($check as $key => $value) {
         $countHDays += 1;

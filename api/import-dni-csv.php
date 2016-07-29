@@ -1,5 +1,7 @@
 <?php
 
+include 'routines.php';
+
 /**
 *   Помощни функции за импорт от CSV
 */
