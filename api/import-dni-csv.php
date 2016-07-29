@@ -50,7 +50,7 @@ class ImportDniCSV {
         if (count($cols) != 13) {
             throw new Exception("Невалиден CSV ред\n\n".$row);
         }
-        $year = (int) $rows[0];
+        $year = (int) $cols[0];
         return $year;
     }
 }
