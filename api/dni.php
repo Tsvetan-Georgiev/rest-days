@@ -1,19 +1,11 @@
 <?php
+
+require_once 'routines.php';
+
 /**
 *	Клас съдържащ функции за откриване на почивни дни
 */
 class RestDays {
-
-	/**
-	*	Високосна ли е годината
-	*
-	*	@param int $year Година
-	*	@return bool Дали е високосна година
-	*/
-	private static function isLeapYear($year)
-	{
-		return ((($year % 4) == 0) && ((($year % 100) != 0) || (($year %400) == 0)));
-	}
 
 	/**
 	*	Намиране на съботите и неделите в дадена година
