@@ -72,25 +72,10 @@ class RestDays {
 		    $m=5;
 		}
 
-		// ако великден е май или денят е преди 10-ти слага нула на деня
-		if ($m==5 or $RC<10) {
-			// стринг от точната дата на великден
-			$razpPetak="0".$RC."-"."0".$m."-".$G;
-			// записва датата в секунди по линукският формат
-			$razpPetak=strtotime($razpPetak);
-			// добавя или изважда дни според втория зададен параметър на функцията
-			$razpPetak2=strtotime(date("d-m-Y",$razpPetak)."-"."$petilipon"." day");
-			// превръща датата във формат МесецДен-Година за да е по-лесно да бъде сортиран с останалите дати
-			$razpPetak2=date("Y-m-d",$razpPetak2);
-		}
-		else{
-			$razpPetak=$RC."-"."0".$m."-".$G;
-			$razpPetak=strtotime($razpPetak);
-			$razpPetak2=strtotime(date("d-m-Y",$razpPetak)."-"."$petilipon"." day");
-			$razpPetak2=date("Y-m-d",$razpPetak2);
-		}
+        // +/- дни от великден
+        $okoloVelikden = strtotime(isoDate($G, $m, $RC)) + $petilipon;
 
-		return $razpPetak2;
+		return date("Y-m-d", $okoloVelikden);
 	}
 
 	/**
