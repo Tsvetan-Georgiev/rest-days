@@ -12,7 +12,7 @@
         // смесен вариант - първо се вика CSV-то, после официалните празници
         $mix = $_REQUEST['mix'];
         if (isset($mix) && $mix == '1') {
-            $check = restDaysYear($year, $check);
+            $check = restDaysYear($year, $check, true);
         }
     } else {
         if (isset($_REQUEST['year']))
