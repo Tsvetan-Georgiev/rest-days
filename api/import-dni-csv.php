@@ -30,14 +30,7 @@ class ImportDniCSV {
             }
         }
 
-        // сортиране и попълване на датата във формат timestamp
-        ksort($restDays);
-        foreach ($restDays as $key => $value) {
-            $ts = strtotime($key);
-            $res[$ts] = $value;
-        }
-
-        return $res;
+        return $restDays;
     }
 
     /**

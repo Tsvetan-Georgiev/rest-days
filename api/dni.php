@@ -42,7 +42,6 @@ class RestDays {
 		    }
 		    $now = strtotime(date("Y-m-d", $now) . "+1 day");
 		}
-		return $hdays;
 	}
 
 	/**
@@ -83,7 +82,7 @@ class RestDays {
 	*
 	*	@param int $year
     *   @param array $hdays
-	*	@return array Списък с почивни дни
+	*	@return array Почивни дни
 	*/
 	public static function get($year, $hdays) {
 		$hdays[$year."-01-01"] = "Нова година";
@@ -101,14 +100,8 @@ class RestDays {
 		$hdays[self::velikDen($year,"1")] = "Великден";
 		$hdays[self::velikDen($year,"0")] = "Великден";
 		$hdays[self::velikDen($year,"-1")] = "Велики понеделник";
-		// сортиране по дати
-		ksort($hdays);
-		foreach ($hdays as $key => $value) {
-			$za_bazata=strtotime($key);
-			$hdaysUnix[$za_bazata] = $value;
-		}
 
-		return $hdaysUnix;
+        return $hdays;
 	}
 }
 

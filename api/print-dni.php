@@ -58,6 +58,15 @@
         </thead>
 
 <?php
+    // сортиране и попълване на датата във формат timestamp
+    ksort($check);
+    foreach ($check as $key => $value) {
+        $ts = strtotime($key);
+        $check2[$ts] = $value;
+    }
+    $check = $check2;
+
+    // печат на таблицата
     $countHDays = 0;
     foreach ($check as $key => $value) {
         $countHDays += 1;
