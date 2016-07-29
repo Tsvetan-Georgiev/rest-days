@@ -7,16 +7,26 @@ require_once 'routines.php';
 */
 class RestDays {
 
+    private $year;
+    private $hdays = [];
+
+    function __construct($year, $hdays = null) {
+        $this->year = $year;
+        if (isset($hdays)) {
+            $this->hdays = $hdays;
+        } else {
+            $this->hdays = [];
+        }
+    }
+
 	/**
 	*	Намиране на съботите и неделите в дадена година
 	*
-	*	@param int $year Година
-	*	@param array &$hdays Масив с почивни дни
 	*	@return void
 	*/
-	private static function getWeekendsOfYear($year, &$hdays){
-		$now ="01.01.".$year;
-		$end_date ="01.01.".($year+1);
+	private function getWeekendsOfYear(){
+		$now ="01.01.".$this->year;
+		$end_date ="01.01.".($this->year+1);
 		$now = strtotime($now);
 		$end_date = strtotime($end_date);
 		while (date("Y-m-d", $now) != date("Y-m-d", $end_date)) {
@@ -25,11 +35,11 @@ class RestDays {
 		    if ($day_index == 0 || $day_index == 6) {
 		    	if ($day_index == 0) {
 		    		$forpush = date("Y-m-d", $now);
-		    		$hdays[$forpush] = "Неделя";
+		    		$this->hdays[$forpush] = "Неделя";
 		    	}
 		    	else{
 		    		$forpush = date("Y-m-d", $now);
-		    		$hdays[$forpush] = "Събота";
+		    		$this->hdays[$forpush] = "Събота";
 		    	}
 		    }
 		    $now = strtotime(date("Y-m-d", $now) . "+1 day");
@@ -72,28 +82,26 @@ class RestDays {
 	/**
 	*	Откриване на всички почивни дни в дадена година
 	*
-	*	@param int $year
-    *   @param array $hdays
 	*	@return array Почивни дни
 	*/
-	public static function get($year, $hdays) {
-		$hdays[$year."-01-01"] = "Нова година";
-		self::getWeekendsOfYear($year, $hdays);
-		$hdays[$year."-03-03"] = "Национален празник";
-		$hdays[$year."-05-01"] = "Ден на труда";
-		$hdays[$year."-05-06"] = "Гергьовден";
-		$hdays[$year."-05-24"] = "Ден на писмеността";
-		$hdays[$year."-09-06"] = "Ден на съединението";
-		$hdays[$year."-09-22"] = "Независимостта на България";
-		$hdays[$year."-12-24"] = "Коледа";
-		$hdays[$year."-12-25"] = "Коледа";
-		$hdays[$year."-12-26"] = "Коледа";
-		$hdays[self::velikDen($year,"2")] = "Велики петък";
-		$hdays[self::velikDen($year,"1")] = "Великден";
-		$hdays[self::velikDen($year,"0")] = "Великден";
-		$hdays[self::velikDen($year,"-1")] = "Велики понеделник";
+	public function get() {
+		$this->hdays[$this->year."-01-01"] = "Нова година";
+		self::getWeekendsOfYear($this->year, $this->hdays);
+		$this->hdays[$this->year."-03-03"] = "Национален празник";
+		$this->hdays[$this->year."-05-01"] = "Ден на труда";
+		$this->hdays[$this->year."-05-06"] = "Гергьовден";
+		$this->hdays[$this->year."-05-24"] = "Ден на писмеността";
+		$this->hdays[$this->year."-09-06"] = "Ден на съединението";
+		$this->hdays[$this->year."-09-22"] = "Независимостта на България";
+		$this->hdays[$this->year."-12-24"] = "Коледа";
+		$this->hdays[$this->year."-12-25"] = "Коледа";
+		$this->hdays[$this->year."-12-26"] = "Коледа";
+		$this->hdays[self::velikDen($this->year,"2")] = "Велики петък";
+		$this->hdays[self::velikDen($this->year,"1")] = "Великден";
+		$this->hdays[self::velikDen($this->year,"0")] = "Великден";
+		$this->hdays[self::velikDen($this->year,"-1")] = "Велики понеделник";
 
-        return $hdays;
+        return $this->hdays;
 	}
 }
 
@@ -105,6 +113,6 @@ class RestDays {
 *	@return array Списък с почивните дни
 */
 function restDaysYear($year, $hdays = null){
-	return RestDays::get($year, $hdays);
+    return (new RestDays($year, $hdays))->get();
 }
 ?>
