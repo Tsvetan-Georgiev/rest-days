@@ -13,10 +13,7 @@ class ImportDniCSV {
     */
     public static function rowToArray($row) {
         $cols = explode(",", $row);
-        if (count($cols) != 13) {
-            throw new Exception("Невалиден CSV ред\n\n".$row);
-        }
-        $year = (int) $rols[0];
+        $year = self::rowToYear($row);
         if ($year < 1990) {
             throw new Exception("Невалидна година ".$year);
         }
@@ -39,6 +36,22 @@ class ImportDniCSV {
         }
 
         return $res;
+    }
+
+    /**
+    *   Взима годината от CSV реда
+    *
+    *   @param string $row CSV ред
+    *
+    *   @return int Година
+    */
+    public static function rowToYear($row) {
+        $cols = explode(",", $row);
+        if (count($cols) != 13) {
+            throw new Exception("Невалиден CSV ред\n\n".$row);
+        }
+        $year = (int) $rows[0];
+        return $year;
     }
 }
 
