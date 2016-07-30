@@ -95,21 +95,21 @@ class RestDays {
     *	@return array Почивни дни
     */
     public function get() {
-        self::setDay($this->year."-01-01", "Нова година");
-        self::getWeekendsOfYear();
-        self::setDay($this->year."-03-03", "Национален празник");
-        self::setDay($this->year."-05-01", "Ден на труда");
-        self::setDay($this->year."-05-06", "Гергьовден");
-        self::setDay($this->year."-05-24", "Ден на писмеността");
-        self::setDay($this->year."-09-06", "Ден на съединението");
-        self::setDay($this->year."-09-22", "Независимостта на България");
-        self::setDay($this->year."-12-24", "Коледа");
-        self::setDay($this->year."-12-25", "Коледа");
-        self::setDay($this->year."-12-26", "Коледа");
-        self::setDay(self::velikDen($this->year,"2"), "Велики петък");
-        self::setDay(self::velikDen($this->year,"1"), "Великден");
-        self::setDay(self::velikDen($this->year,"0"), "Великден");
-        self::setDay(self::velikDen($this->year,"-1"), "Велики понеделник");
+        $this->setDay($this->year."-01-01", "Нова година");
+        $this->getWeekendsOfYear();
+        $this->setDay($this->year."-03-03", "Национален празник");
+        $this->setDay($this->year."-05-01", "Ден на труда");
+        $this->setDay($this->year."-05-06", "Гергьовден");
+        $this->setDay($this->year."-05-24", "Ден на писмеността");
+        $this->setDay($this->year."-09-06", "Ден на съединението");
+        $this->setDay($this->year."-09-22", "Независимостта на България");
+        $this->setDay($this->year."-12-24", "Коледа");
+        $this->setDay($this->year."-12-25", "Коледа");
+        $this->setDay($this->year."-12-26", "Коледа");
+        $this->setDay($this->velikDen($this->year,2), "Велики петък");
+        $this->setDay($this->velikDen($this->year,1), "Великден");
+        $this->setDay($this->velikDen($this->year,0), "Великден");
+        $this->setDay($this->velikDen($this->year,-1), "Велики понеделник");
 
         return $this->hdays;
     }
