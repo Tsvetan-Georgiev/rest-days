@@ -95,17 +95,28 @@ class RestDays {
     *	@return array Почивни дни
     */
     public function get() {
-        $this->setDay($this->year."-01-01", "Нова година");
+
+        // сътите и неделите
         $this->getWeekendsOfYear();
-        $this->setDay($this->year."-03-03", "Национален празник");
-        $this->setDay($this->year."-05-01", "Ден на труда");
-        $this->setDay($this->year."-05-06", "Гергьовден");
-        $this->setDay($this->year."-05-24", "Ден на писмеността");
-        $this->setDay($this->year."-09-06", "Ден на съединението");
-        $this->setDay($this->year."-09-22", "Независимостта на България");
-        $this->setDay($this->year."-12-24", "Коледа");
-        $this->setDay($this->year."-12-25", "Коледа");
-        $this->setDay($this->year."-12-26", "Коледа");
+
+        // празниците с фиксирана дата
+        $fixed = array(
+                (object) array("suff" => "-01-01", "desc" => "Нова година"),
+                (object) array("suff" => "-03-03", "desc" => "Национален празник"),
+                (object) array("suff" => "-05-01", "desc" => "Ден на труда"),
+                (object) array("suff" => "-05-06", "desc" => "Гергьовден"),
+                (object) array("suff" => "-05-24", "desc" => "Ден на писмеността"),
+                (object) array("suff" => "-09-06", "desc" => "Ден на съединението"),
+                (object) array("suff" => "-09-22", "desc" => "Независимостта на България"),
+                (object) array("suff" => "-12-24", "desc" => "Коледа"),
+                (object) array("suff" => "-12-25", "desc" => "Коледа"),
+                (object) array("suff" => "-12-26", "desc" => "Коледа")
+        );
+        foreach ($fixed as $value) {
+            $this->setDay($this->year.$value->suff, $value->desc);
+        }
+
+        // Великден
         $this->setDay($this->velikDen($this->year,2), "Велики петък");
         $this->setDay($this->velikDen($this->year,1), "Великден");
         $this->setDay($this->velikDen($this->year,0), "Великден");
