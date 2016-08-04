@@ -1,5 +1,37 @@
 <?php
-header('Content-Type: text/html; charset=utf-8');
+    header('Content-Type: text/html; charset=utf-8');
+?>
+<meta charset="UTF-8">
+<style>
+    table{
+        border: 1px solid black;
+    }
+    td{
+        padding: 1px;
+        border-left: 1px solid black;
+    }
+    td:first-child{
+        border-left: none;
+    }
+    thead td{
+        font-weight: bold;
+        border: none;
+    }
+</style>
+    <table>
+        <thead>
+            <tr align="center"><td colspan="3"><b>Година: <?= $year ?></b></td></tr>
+            <tr>
+                <td>
+                    Дата
+                </td>
+                <td>
+                     Наименование
+                </td>
+            </tr>
+        </thead>
+
+<?php
 
 require_once '../connect.php';
 require_once '../dni.php';
@@ -21,7 +53,16 @@ if ($stmt = $conn->prepare("SELECT restDay, name from rest_days WHERE restDay>=?
     $stmt->bind_result($restDay, $name);
 
     while ($stmt->fetch()) {
-        echo "$restDay  $name";
+        echo "
+            <tr
+                <td>
+                    ".$restDay."
+                </td>
+                <td>
+                    ".$name."
+                </td>
+            </tr>
+        ";
     }
 
     $stmt->close();
@@ -30,3 +71,4 @@ if ($stmt = $conn->prepare("SELECT restDay, name from rest_days WHERE restDay>=?
 $conn->close();
 
 ?>
+</table>
