@@ -8,38 +8,44 @@
     $year = isset($_REQUEST['year']) ? $_REQUEST['year'] : date("Y");
     $removeDay = isset($_REQUEST['removeDay']) ? $_REQUEST['removeDay'] : null;
 ?>
-<meta charset="UTF-8">
-<style>
-    table{
-        border: 1px solid black;
-    }
-    td{
-        padding: 1px;
-        border-left: 1px solid black;
-    }
-    td:first-child{
-        border-left: none;
-    }
-    thead td{
-        font-weight: bold;
-        border: none;
-    }
-</style>
-    <table>
-        <thead>
-            <tr align="center"><td colspan="3"><b>Година: <?= $year ?></b></td></tr>
-            <tr>
-                <td>
-                    Дата
-                </td>
-                <td>
-                     Наименование
-                </td>
-                <td>
-                    *
-                </td>
-            </tr>
-        </thead>
+<!DOCTYPE html>
+<html lang='bg'>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Bootstrap a month</title>
+        <style>
+            table{
+                border: 1px solid black;
+            }
+            td{
+                padding: 1px;
+                border-left: 1px solid black;
+            }
+            td:first-child{
+                border-left: none;
+            }
+            thead td{
+                font-weight: bold;
+                border: none;
+            }
+        </style>
+    </head>
+    <body>
+        <table>
+            <thead>
+                <tr align="center"><td colspan="3"><b>Година: <?= $year ?></b></td></tr>
+                <tr>
+                    <td>
+                        Дата
+                    </td>
+                    <td>
+                         Наименование
+                    </td>
+                    <td>
+                        *
+                    </td>
+                </tr>
+            </thead>
 
 <?php
 
@@ -89,4 +95,6 @@ if ($stmt = $conn->prepare("SELECT restDay, name from rest_days WHERE restDay>=?
 $conn->close();
 
 ?>
-</table>
+        </table>
+    </body>
+</html>
