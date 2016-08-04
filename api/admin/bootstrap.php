@@ -1,6 +1,10 @@
 <?php
     header('Content-Type: text/html; charset=utf-8');
 
+    require_once '../connect.php';
+    require_once '../dni.php';
+    require_once '../import-dni-csv.php';
+
     $year = isset($_REQUEST['year']) ? $_REQUEST['year'] : date("Y");
 ?>
 <meta charset="UTF-8">
@@ -34,10 +38,6 @@
         </thead>
 
 <?php
-
-require_once '../connect.php';
-require_once '../dni.php';
-require_once '../import-dni-csv.php';
 
 $conn = connect_db();
 
