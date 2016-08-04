@@ -6,6 +6,7 @@
     require_once '../import-dni-csv.php';
 
     $year = isset($_REQUEST['year']) ? $_REQUEST['year'] : date("Y");
+    $removeDay = isset($_REQUEST['removeDay']) ? $_REQUEST['removeDay'] : null;
 ?>
 <meta charset="UTF-8">
 <style>
@@ -34,12 +35,26 @@
                 <td>
                      Наименование
                 </td>
+                <td>
+                    *
+                </td>
             </tr>
         </thead>
 
 <?php
 
 $conn = connect_db();
+
+// изтриване на почивен ден при параметър 'removeDay'
+if (!is_null($removeDay)) {
+    if ($stmt = $conn->prepare("DELETE FROM rest_days WHERE restDay=?")
+        or trigger_error($conn->error, E_USER_ERROR)) {
+
+            $stmt->bind_param("s", $removeDay);
+
+            $stmt->execute() or trigger_error($stmt->error, E_USER_ERROR);
+    }
+}
 
 if ($stmt = $conn->prepare("SELECT restDay, name from rest_days WHERE restDay>=? and restDay<=? ORDER BY restDay")
     or trigger_error($conn->error, E_USER_ERROR)) {
@@ -60,6 +75,9 @@ if ($stmt = $conn->prepare("SELECT restDay, name from rest_days WHERE restDay>=?
                 </td>
                 <td>
                     ".$name."
+                </td>
+                <td>
+                    <a href='bootstrap.php?year={$year}&removeDay={$restDay}'>X</a>
                 </td>
             </tr>
         ";
