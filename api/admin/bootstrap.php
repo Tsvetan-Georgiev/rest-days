@@ -9,7 +9,7 @@ $year = isset($_REQUEST['year']) ? $_REQUEST['year'] : date("Y");
 
 $conn = connect_db();
 
-if ($stmt = $conn->prepare("SELECT restDay, name from rest_days WHERE restDay>=? and restDay<=?")) {
+if ($stmt = $conn->prepare("SELECT restDay, name from rest_days WHERE restDay>=? and restDay<=? ORDER BY restDay")) {
 
     $ybeg = "{$year}-01-01";
     $yend = "{$year}-12-31";
