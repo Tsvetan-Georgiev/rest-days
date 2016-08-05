@@ -87,10 +87,10 @@ $conn = connect_db();
 
 // добавяне на дата при параметър 'addDay'
 if (!is_null($addDay)) {
-    if ($stmt = $conn->prepare("INSERT INTO rest_days (restDay,name) VALUES(?, ?)")
+    if ($stmt = $conn->prepare("INSERT INTO rest_days (restDay,name) VALUES(?, ?) ON DUPLICATE KEY UPDATE name=?")
         or trigger_error($conn->error, E_USER_ERROR)) {
 
-            $stmt->bind_param("ss", $addDay, $nameDay);
+            $stmt->bind_param("sss", $addDay, $nameDay, $nameDay);
 
             $stmt->execute() or trigger_error($stmt->error, E_USER_ERROR);
     }
