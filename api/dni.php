@@ -117,10 +117,10 @@ class RestDays {
         }
 
         // Великден
-        $this->setDay($this->velikDen($this->year,-1), "Велики петък");
-        $this->setDay($this->velikDen($this->year,0), "Великден");
-        $this->setDay($this->velikDen($this->year,1), "Великден");
-        $this->setDay($this->velikDen($this->year,2), "Велики понеделник");
+        $this->setDay($this->velikDen($this->year,"-2"), "Велики петък");
+        $this->setDay($this->velikDen($this->year,"-1"), "Великден");
+        $this->setDay($this->velikDen($this->year,"0"), "Великден");
+        $this->setDay($this->velikDen($this->year,"1"), "Велики понеделник");
 
         return $this->hdays;
     }
