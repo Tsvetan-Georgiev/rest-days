@@ -19,7 +19,7 @@
 <html lang='bg'>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Стартиране на година</title>
+        <title>Стартиране на година <?= $year ?></title>
         <style>
             table{
                 border: 1px solid black;
@@ -176,7 +176,7 @@ $conn->close();
 ?>
         </table>
         <h3>Стартиране на година <?= $year ?> <i>отначало</i>:</h3>
-        <form action="bootstrap.php">
+        <form action="bootstrap.php" method="POST">
             Csv <i>(optional)</i>:<br>
             <input type="text" name="csv" size="60"><br><br>
             <input type="hidden" name="year" value="<?= $year ?>">
