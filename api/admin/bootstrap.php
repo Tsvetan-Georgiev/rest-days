@@ -39,6 +39,7 @@
     </head>
     <body>
         <form name="newDate" method="GET" action=<?php $_SERVER['PHP_SELF'] ?>>
+            <input type="hidden" name="year" value="<?= $year ?>">
             <table>
                 <tr>
                     <td/>
