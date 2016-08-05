@@ -26,6 +26,34 @@
     }
 </style>
     <table>
+        <tr>
+            <td>
+            </td>
+            <td>
+                Дата
+            </td>
+            <td>
+                Наименование на почивният ден
+            </td>
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Добавяне на дата
+            </td>
+            <td>
+    <form name = "newDate" method = "GET" action = <?php $_SERVER['PHP_SELF'] ?>>
+                <input type = "date" name = "addDay">
+            </td>
+            <td>
+                <input type = "text" name = "nameDay" value = "Почивен ден">
+            </td>
+            <td>
+                <input type = "submit" name = "newDate" value = "Прибави дата">
+    </form>
+</table>
+    <table>
         <thead>
             <tr align="center"><td colspan="3"><b>Година: <?= $year ?></b></td></tr>
             <tr>
@@ -44,6 +72,21 @@
 <?php
 
 $conn = connect_db();
+
+// присвоява датите при натискане на 'submit'
+if(isset($_GET['newDate'])){
+    $addDay = $_GET['addDay'];
+    $nameDay = $_GET['nameDay'];
+}
+
+// добавяне на дата при параметър 'addDay'
+if (!is_null($addDay)) {
+    if ($stmt = $conn->prepare("INSERT INTO rest_days (restDay,name) VALUES(?, ?)")
+        or trigger_error($conn->error, E_USER_ERROR)) {
+            $stmt->bind_param("ss", $addDay, $nameDay  );
+            $stmt->execute() or trigger_error($stmt->error, E_USER_ERROR);
+    }
+}
 
 // изтриване на почивен ден при параметър 'removeDay'
 if (!is_null($removeDay)) {
