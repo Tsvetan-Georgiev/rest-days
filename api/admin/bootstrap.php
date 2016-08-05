@@ -6,7 +6,9 @@
     require_once '../import-dni-csv.php';
 
     $year = isset($_REQUEST['year']) ? $_REQUEST['year'] : date("Y");
+    $addDay = isset($_REQUEST['addDay']) ? $_REQUEST['addDay'] : null;
     $removeDay = isset($_REQUEST['removeDay']) ? $_REQUEST['removeDay'] : null;
+    $nameDay = isset($_REQUEST['nameDay']) ? $_REQUEST['nameDay'] : null;
     $again = isset($_REQUEST['again']) ? $_REQUEST['again'] : null;
     $csv = isset($_REQUEST['csv']) ? $_REQUEST['csv'] : null;
 
@@ -36,6 +38,34 @@
         </style>
     </head>
     <body>
+        <form name="newDate" method="GET" action=<?php $_SERVER['PHP_SELF'] ?>>
+            <table>
+                <tr>
+                    <td/>
+                    <td>
+                        Дата
+                    </td>
+                    <td>
+                        Наименование на почивният ден
+                    </td>
+                    <td/>
+                </tr>
+                <tr>
+                    <td>
+                        Добавяне на дата
+                    </td>
+                    <td>
+                        <input type="date" name="addDay">
+                    </td>
+                    <td>
+                        <input type="text" name="nameDay" value="Почивен ден">
+                    </td>
+                    <td>
+                        <input type="submit" value="Прибави дата">
+                    </td>
+            </table>
+        </form>
+
         <table>
             <thead>
                 <tr align="center"><td colspan="3"><b>Година: <?= $year ?></b></td></tr>
@@ -51,10 +81,21 @@
                     </td>
                 </tr>
             </thead>
-
 <?php
 
 $conn = connect_db();
+
+// добавяне на дата при параметър 'addDay'
+if (!is_null($addDay)) {
+    if ($stmt = $conn->prepare("INSERT INTO rest_days (restDay,name) VALUES(?, ?)")
+        or trigger_error($conn->error, E_USER_ERROR)) {
+
+            $stmt->bind_param("ss", $addDay, $nameDay);
+
+            $stmt->execute() or trigger_error($stmt->error, E_USER_ERROR);
+    }
+    $stmt->close();
+}
 
 // изтриване на почивен ден при параметър 'removeDay'
 if (!is_null($removeDay)) {
