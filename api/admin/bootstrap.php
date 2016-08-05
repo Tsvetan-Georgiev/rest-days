@@ -156,10 +156,10 @@ if ($stmt = $conn->prepare("SELECT restDay, name from rest_days WHERE restDay>=?
         echo "
             <tr>
                 <td>
-                    ".$restDay."
+                    {$restDay}
                 </td>
                 <td>
-                    ".$name."
+                    {$name}
                 </td>
                 <td>
                     <a href='bootstrap.php?year={$year}&removeDay={$restDay}'>X</a>
