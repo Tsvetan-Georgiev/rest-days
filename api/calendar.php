@@ -35,6 +35,7 @@
         </style>
     </head>
     <body>
+        <h1><?= $year ?></h1>
         <table style="border: none">
             <tr>
 <?php
