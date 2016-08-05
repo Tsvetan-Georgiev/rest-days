@@ -1,7 +1,7 @@
 <?php
 require_once 'routines.php';
 
-function printCalendar($year, $month, $hdays) {
+function printCalendar($year, $month, $hdays, &$workDays) {
 
     $firstDayOfMonth = strtotime(isoDate($year, $month, 1));
     $firstDayOfWeek = date('w', $firstDayOfMonth);

@@ -56,11 +56,14 @@ if ($stmt = $conn->prepare("SELECT restDay, name FROM rest_days WHERE restDay>=?
     $stmt->close();
 }
 
+$yearWorkDays = 0;
 for ($mon=1; $mon<=12; $mon++) {
     echo "<td style='border: none;'>";
-    printCalendar($year, $mon, $hdays);
+    $workDays = 0;
+    printCalendar($year, $mon, $hdays, $workDays);
+    $yearWorkDays += $workDays;
     echo "</td>";
-    if ($mon === 6) {
+    if ($mon % 4 == 0) {
         echo "</tr><tr>";
     }
 }
@@ -69,5 +72,6 @@ $conn->close();
 ?>
             </tr>
         </table>
+        <b>Работни дни в годината: <?= $yearWorkDays ?></b>
     </body>
 </html>
