@@ -83,9 +83,12 @@ if(isset($_GET['newDate'])){
 if (!is_null($addDay)) {
     if ($stmt = $conn->prepare("INSERT INTO rest_days (restDay,name) VALUES(?, ?)")
         or trigger_error($conn->error, E_USER_ERROR)) {
+
             $stmt->bind_param("ss", $addDay, $nameDay  );
+
             $stmt->execute() or trigger_error($stmt->error, E_USER_ERROR);
     }
+    $stmt->close();
 }
 
 // изтриване на почивен ден при параметър 'removeDay'
