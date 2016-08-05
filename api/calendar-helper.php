@@ -36,7 +36,7 @@ function printCalendar($year, $month, $hdays, &$workDays) {
     $currDay = $firstDayOfMonth;
     $currDayOfWeek = $firstDayOfWeek;
     $workDays = 0;
-    while ($currDay <= $lastDayOfMonth) {
+    while (strcmp(date("Y-m-d", $currDay), date("Y-m-d", $lastDayOfMonth)) <= 0) {
 
         $isRest = isset($hdays[date("Y-m-d", $currDay)]);
 
