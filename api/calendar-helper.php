@@ -24,8 +24,8 @@ function printCalendar($year, $month, $hdays, &$workDays) {
             <td>С</td>
             <td>Ч</td>
             <td>П</td>
-            <td>С</td>
-            <td>Н</td>
+            <td class='rest'>С</td>
+            <td class='rest'>Н</td>
         </thead>
         <tr>
 <?php
